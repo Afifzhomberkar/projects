@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Patient</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+      }
+
+      main {
+        display: flex;
+        width: 100vw;
+        min-height: 100vh;
+      }
+
+      #sidebar {
+        width: 230px;
+        background: #232946;
+        color: #fff;
+        padding: 2rem 1rem;
+        min-height: 100vh;
+        box-shadow: 2px 0 10px rgba(35,41,70,0.07);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #sidebar h1 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        letter-spacing: 2px;
+        color: #eebbc3;
+      }
+
+      nav ul {
+        list-style-type: none;
+        padding: 0;
+        width: 100%;
+      }
+
+      nav ul li {
+        margin-bottom: 1.5rem;
+        width: 100%;
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: #eebbc3;
+        font-size: 1.1rem;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        display: block;
+        transition: background 0.2s, color 0.2s;
+      }
+
+      nav ul li a:hover, nav ul li a:focus {
+        background: #eebbc3;
+        color: #232946;
+      }
+
+      #content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 3rem 1rem;
+      }
+
+      #content h1 {
+        color: #232946;
+        margin-bottom: 2rem;
+        font-size: 2.2rem;
+        letter-spacing: 1px;
+      }
+
+      form {
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.10);
+        padding: 2.5rem 2rem 2rem 2rem;
+        width: 100%;
+        max-width: 430px;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+
+      .form-group,
+      .form-group-gender {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+
+      .form-group-gender {
+        flex-direction: row;
+        align-items: center;
+        gap: 1.2rem;
+      }
+
+      .form-group-gender label:first-child {
+        font-weight: bold;
+        font-size: 1.08rem;
+        margin-right: 0.7rem;
+        color: #232946;
+      }
+
+      .form-group label {
+        font-weight: bold;
+        font-size: 1.08rem;
+        color: #232946;
+      }
+
+      .form-group input[type="text"],
+      .form-group input[type="number"],
+      .form-group input[type="tel"] {
+        padding: 0.6rem;
+        border: 1px solid #b8c1ec;
+        border-radius: 6px;
+        font-size: 1rem;
+        background: #f4f6fb;
+        transition: border 0.2s;
+      }
+
+      .form-group input:focus,
+      .form-group-gender input:focus {
+        border: 1.5px solid #eebbc3;
+        outline: none;
+      }
+
+      .form-group-gender input[type="radio"] {
+        margin-right: 0.3rem;
+        accent-color: #eebbc3;
+      }
+
+      button[type="submit"] {
+        margin-top: 1rem;
+        padding: 0.7rem 0;
+        background: linear-gradient(90deg, #eebbc3 0%, #b8c1ec 100%);
+        color: #232946;
+        font-weight: bold;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(35,41,70,0.07);
+        transition: background 0.2s, color 0.2s;
+      }
+
+      button[type="submit"]:hover {
+        background: linear-gradient(90deg, #b8c1ec 0%, #eebbc3 100%);
+        color: #232946;
+      }
+
+      @media (max-width: 800px) {
+        main {
+          flex-direction: column;
+        }
+        #sidebar {
+          width: 100vw;
+          min-height: unset;
+          flex-direction: row;
+          justify-content: space-around;
+          align-items: center;
+          padding: 1rem 0.5rem;
+          box-shadow: none;
+        }
+        #content {
+          margin-left: 0;
+          padding: 2rem 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div id="sidebar">
+        <h1>Dashboard</h1>
+        <nav>
+          <ul>
+            <li>
+              <a href="/view-patients" id="view-patients">View Patients</a>
+            </li>
+            <li><a href="/add-patient" id="add-patient">Add Patient</a></li>
+            <li><a href="/logout" id="Logout">Logout</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div id="content">
+        <h1>Update Patient</h1>
+        <form action="" method="POST">
+          <div class="form-group">
+            <label for="name">Patient Name:</label>
+            <input type="text" name="name" id="name" value="{{patient.name}}" required />
+          </div>
+          <div class="form-group">
+            <label for="age">Patient's Age:</label>
+            <input type="number" name="age" id="age" min="0" value="{{patient.age}}" required />
+          </div>
+          <div class="form-group-gender">
+            <label for="gender">Patient's Gender:</label>
+            <input type="radio" value="male" name="gender" id="male" {% if patient.gender == 'male' %}checked{% endif %} required />
+            <label for="male">Male</label>
+            <input type="radio" value="female" name="gender" id="female" {% if patient.gender == 'female' %}checked{% endif %} />
+            <label for="female">Female</label>
+          </div>
+          <div class="form-group">
+            <label for="contact">Patient's Contact No:</label>
+            <input type="tel" name="contact" id="contact" value="{{patient.phone}}" maxlength="10" />
+          </div>
+          <div class="form-group">
+            <label for="disease">Patient's Disease:</label>
+            <input type="text" id="disease" name="disease" value="{{patient.disease}}" />
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

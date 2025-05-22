@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Patient</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f3f4f6;
+        margin: 0;
+        padding: 0;
+
+        height: 100vh;
+      }
+
+      main {
+        background-color: #ffffff;
+
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        min-height: 100vh;
+      }
+
+      #sidebar {
+        background-color: #333333;
+        padding: .5rem 1rem;
+      }
+
+      h1 {
+        text-align: center;
+        color: black;
+      }
+
+      nav ul {
+        display: flex;
+        justify-content: end;
+        
+        padding: 0 2rem;
+        list-style-type: none;
+        padding: 0;
+      }
+
+      nav ul li {
+        margin-bottom: 1rem;
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: #007bff;
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+
+      #content {
+        min-height: 100vh;
+        padding-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        background-color: rgb(235, 235, 235);
+      }
+
+      table {
+        width: 80%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+      td > a {
+        color: white;
+        text-decoration: none;
+        background-color: blue;
+        padding-inline: 15px;
+        padding-block: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <nav id="sidebar">
+        <ul>
+
+
+          <li><a href="/logout" id="Logout">Logout</a></li>
+        </ul>
+      </nav>
+      <div id="content">
+        <h1>View Patients</h1>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Patient ID</th>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Contact</th>
+              <th>Disease</th>
+              <th>Delete Info</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for patient in patients %}
+            <tr>
+              <td>{{ patient.id }}</td>
+              <td>{{ patient.name }}</td>
+              <td>{{ patient.age }}</td>
+              <td>{{ patient.gender }}</td>
+              <td>{{ patient.phone }}</td>
+              <td>{{ patient.disease }}</td>
+              <td>
+                <a
+                  href="/doctor-delete-patient/{{ patient.id }}"
+                  style="background-color: red"
+                  >Delete</a
+                >
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </body>
+</html>

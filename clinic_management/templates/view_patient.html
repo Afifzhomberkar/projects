@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Patient</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+      }
+
+      main {
+        display: flex;
+        width: 100vw;
+        min-height: 100vh;
+      }
+
+      #sidebar {
+        width: 230px;
+        background: #232946;
+        color: #fff;
+        padding: 2rem 1rem;
+        min-height: 100vh;
+        box-shadow: 2px 0 10px rgba(35,41,70,0.07);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #sidebar h1 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        letter-spacing: 2px;
+        color: #eebbc3;
+      }
+
+      nav ul {
+        list-style-type: none;
+        padding: 0;
+        width: 100%;
+      }
+
+      nav ul li {
+        margin-bottom: 1.5rem;
+        width: 100%;
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: #eebbc3;
+        font-size: 1.1rem;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        display: block;
+        transition: background 0.2s, color 0.2s;
+      }
+
+      nav ul li a:hover, nav ul li a:focus {
+        background: #eebbc3;
+        color: #232946;
+      }
+
+      #content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 3rem 1rem;
+        background: transparent;
+      }
+
+      #content h1 {
+        color: #232946;
+        margin-bottom: 2rem;
+        font-size: 2.2rem;
+        letter-spacing: 1px;
+      }
+
+      table {
+        width: 100%;
+        max-width: 1000px;
+        border-collapse: collapse;
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.10);
+        overflow: hidden;
+        margin: 20px 0;
+      }
+      th, td {
+        border: none;
+        padding: 14px 12px;
+        text-align: left;
+      }
+      th {
+        background-color: #e0eafc;
+        color: #232946;
+        font-weight: bold;
+        font-size: 1.05rem;
+      }
+      tr:nth-child(even) {
+        background-color: #f4f6fb;
+      }
+      tr:hover {
+        background-color: #eebbc3;
+        color: #232946;
+      }
+      td > a {
+        color: #fff;
+        text-decoration: none;
+        background-color: #3b82f6;
+        padding: 7px 18px;
+        border-radius: 5px;
+        font-weight: 500;
+        transition: background 0.2s, color 0.2s;
+        display: inline-block;
+      }
+      td > a:hover {
+        background-color: #232946;
+        color: #eebbc3;
+      }
+      td > a.delete {
+        background-color: #ef4444;
+      }
+      td > a.delete:hover {
+        background-color: #232946;
+        color: #eebbc3;
+      }
+
+      @media (max-width: 800px) {
+        main {
+          flex-direction: column;
+        }
+        #sidebar {
+          width: 100vw;
+          min-height: unset;
+          flex-direction: row;
+          justify-content: space-around;
+          align-items: center;
+          padding: 1rem 0.5rem;
+          box-shadow: none;
+        }
+        #content {
+          margin-left: 0;
+          padding: 2rem 0.5rem;
+        }
+        table {
+          font-size: 0.95rem;
+        }
+      }
+      @media (max-width: 600px) {
+        table, thead, tbody, th, td, tr {
+          display: block;
+        }
+        thead tr {
+          display: none;
+        }
+        tr {
+          margin-bottom: 1rem;
+          background: #fff !important;
+          border-radius: 10px;
+          box-shadow: 0 2px 8px rgba(31,38,135,0.07);
+        }
+        td {
+          padding: 10px;
+          text-align: right;
+          position: relative;
+        }
+        td:before {
+          content: attr(data-label);
+          position: absolute;
+          left: 10px;
+          top: 10px;
+          font-weight: bold;
+          color: #232946;
+          text-align: left;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div id="sidebar">
+        <h1>Dashboard</h1>
+        <nav>
+          <ul>
+            <li>
+              <a href="/view-patients" id="view-patients">View Patients</a>
+            </li>
+            <li><a href="/add-patient" id="add-patient">Add Patient</a></li>
+            <li><a href="/logout" id="Logout">Logout</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div id="content">
+        <h1>View Patients</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Patient ID</th>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Contact</th>
+              <th>Disease</th>
+              <th>Update Info.</th>
+              <th>Delete Info</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for patient in patients %}
+            <tr>
+              <td data-label="Patient ID">{{ patient.id }}</td>
+              <td data-label="Name">{{ patient.name }}</td>
+              <td data-label="Age">{{ patient.age }}</td>
+              <td data-label="Gender">{{ patient.gender }}</td>
+              <td data-label="Contact">{{ patient.phone }}</td>
+              <td data-label="Disease">{{ patient.disease }}</td>
+              <td data-label="Update Info.">
+                <a href="/update-patient/{{ patient.id }}">Update</a>
+              </td>
+              <td data-label="Delete Info">
+                <a href="/delete-patient/{{ patient.id }}" class="delete">Delete</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </body>
+</html>

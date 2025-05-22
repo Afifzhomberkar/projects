@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+      }
+
+      main {
+        display: flex;
+        width: 100vw;
+        min-height: 100vh;
+      }
+
+      #sidebar {
+        width: 230px;
+        background: #232946;
+        color: #fff;
+        padding: 2rem 1rem;
+        min-height: 100vh;
+        box-shadow: 2px 0 10px rgba(35,41,70,0.07);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #sidebar h1 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        letter-spacing: 2px;
+        color: #eebbc3;
+      }
+
+      nav ul {
+        list-style-type: none;
+        padding: 0;
+        width: 100%;
+      }
+
+      nav ul li {
+        margin-bottom: 1.5rem;
+        width: 100%;
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: #eebbc3;
+        font-size: 1.1rem;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        display: block;
+        transition: background 0.2s, color 0.2s;
+      }
+
+      nav ul li a:hover, nav ul li a:focus {
+        background: #eebbc3;
+        color: #232946;
+      }
+
+      #content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 3rem 1rem;
+      }
+
+      form {
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.10);
+        padding: 2.5rem 2rem 2rem 2rem;
+        width: 100%;
+        max-width: 430px;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+
+      h1 {
+        text-align: center;
+        color: #232946;
+        margin-bottom: 1.5rem;
+        font-size: 2rem;
+        letter-spacing: 1px;
+      }
+
+      .error-message p {
+        color: #ef4444;
+        text-align: center;
+        margin: 0 0 1rem 0;
+        font-weight: bold;
+      }
+
+      .radio-group {
+        display: flex;
+        justify-content: space-evenly;
+        background-color: #dbdbdb;
+        padding: 1rem;
+        border-radius: 6px;
+        margin-bottom: 1rem;
+      }
+
+      .radio-group div {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+
+      label {
+        font-size: 1rem;
+        color: #232946;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 0.6rem;
+        border: 1px solid #b8c1ec;
+        border-radius: 6px;
+        font-size: 1rem;
+        background: #f4f6fb;
+        transition: border 0.2s;
+      }
+
+      input:focus {
+        border: 1.5px solid #eebbc3;
+        outline: none;
+      }
+
+      input[type="radio"] {
+        accent-color: #eebbc3;
+      }
+
+      button[type="submit"] {
+        margin-top: 1rem;
+        padding: 0.7rem 0;
+        background: linear-gradient(90deg, #eebbc3 0%, #b8c1ec 100%);
+        color: #232946;
+        font-weight: bold;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(35,41,70,0.07);
+        transition: background 0.2s, color 0.2s;
+      }
+
+      button[type="submit"]:hover {
+        background: linear-gradient(90deg, #b8c1ec 0%, #eebbc3 100%);
+        color: #232946;
+      }
+
+      @media (max-width: 800px) {
+        main {
+          flex-direction: column;
+        }
+        #sidebar {
+          width: 100vw;
+          min-height: unset;
+          flex-direction: row;
+          justify-content: space-around;
+          align-items: center;
+          padding: 1rem 0.5rem;
+          box-shadow: none;
+        }
+        #content {
+          margin-left: 0;
+          padding: 2rem 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      
+      <div id="content">
+        <form action="/" method="POST">
+          <h1>Login</h1>
+          <div class="error-message">
+            <p>{{ error }}</p>
+          </div>
+          <div class="radio-group">
+            <div>
+              <input type="radio" name="userType" id="receptionist" value="receptionist" required />
+              <label for="receptionist">Receptionist</label>
+            </div>
+            <div>
+              <input type="radio" name="userType" id="doctor" value="doctor" required />
+              <label for="doctor">Doctor</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
